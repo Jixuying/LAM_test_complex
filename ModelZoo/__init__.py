@@ -1,8 +1,8 @@
 import os
 import torch
 
-# MODEL_DIR = '/content/LAM_Demo/ModelZoo/models'
-MODEL_DIR = '/home/disk1/jixuying/pycharm/毕设/my_complex_ChannelNet/LAM_Demo/ModelZoo/models/my_model'
+MODEL_DIR = '/content/LAM_test/ModelZoo/models/my_model'
+# MODEL_DIR = '/home/disk1/jixuying/pycharm/毕设/my_complex_ChannelNet/LAM_Demo/ModelZoo/models/my_model'
 
 NN_LIST = [
     'RCAN',
