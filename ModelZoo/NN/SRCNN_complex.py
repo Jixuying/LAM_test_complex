@@ -7,7 +7,7 @@ from torchvision import datasets, transforms
 from complexLayers import ComplexBatchNorm2d, ComplexConv2d, ComplexLinear
 from complexFunctions import complex_relu, complex_max_pool2d
 from scipy.io import loadmat,savemat
-from tensorboardX import SummaryWriter
+# from tensorboardX import SummaryWriter
 # import tensorwatch as tw
 import torchvision.models
 from torchviz import make_dot
