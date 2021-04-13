@@ -10,7 +10,7 @@ from scipy.io import loadmat,savemat
 # from tensorboardX import SummaryWriter
 # import tensorwatch as tw
 import torchvision.models
-from torchviz import make_dot
+# from torchviz import make_dot
 import os.path
 
 class SRCNN_ComplexNet(nn.Module):
