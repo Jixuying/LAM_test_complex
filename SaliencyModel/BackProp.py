@@ -95,6 +95,9 @@ def Path_gradient(numpy_image, model, attr_objective, path_interpolation_func, c
             result = model(_add_batch_one(img_tensor).cuda())
             target = attr_objective(result)
             target.backward()
+            print(img_tensor.shape)
+            print(img_tensor)
+            print(img_tensor.grad)
             grad = img_tensor.grad.cpu().numpy()
             if np.any(np.isnan(grad)):
                 grad[np.isnan(grad)] = 0.0
