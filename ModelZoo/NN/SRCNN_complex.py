@@ -49,7 +49,7 @@ class SRCNN_ComplexNet(nn.Module):
         #     outputs.append(xi)
         # xr, xi = complex_relu(xr, xi)
 
-        x_out = torch.zeros(len(xr[:, 0, 0, 0]), 2, len(xr[1, 0, :, 1]), len(xr[1, 0, 1, :]))
+        x_out = torch.zeros(len(xr[:, 0, 0, 0]), 2, len(xr[0, 0, :, 1]), len(xr[0, 0, 1, :]))
         x_out[:, 0, :, :] = xr[:, 0, :, :]
         x_out[:, 1, :, :] = xi[:, 0, :, :]
 
