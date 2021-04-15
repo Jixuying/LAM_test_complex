@@ -44,7 +44,7 @@ class DNCNN_ComplexNet(nn.Module):
                 setattr(self, 'bn%i' % i, bn)
                 self.bns.append(bn)
 
-    def forward(self, x,device): # forward函数定义了网络的前向传播的顺序
+    def forward(self, x): # forward函数定义了网络的前向传播的顺序
         with torch.no_grad():
             xr = x[:, 0, :, :]  # x就是传进来的data
             # imaginary part to zero
