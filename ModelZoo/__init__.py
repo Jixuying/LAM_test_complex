@@ -18,7 +18,7 @@ NN_LIST = [
     'DNCNNpara_1218_rx_1sir_5_complex_channelnet',
     'SRCNNpara_1218_rx_1sir_5_complex_channelnet2',
     'SRCNNpara_1218_rx_1sir_5_complex_channelnet3',
-    'SRCNNpara_1218_rx_1sir_n10_complex_channelnet2',,
+    'SRCNNpara_1218_rx_1sir_n10_complex_channelnet2',
     'SRCNNpara_1218_rx_1sir_n10_complex_channelnet3'
 ]
 
