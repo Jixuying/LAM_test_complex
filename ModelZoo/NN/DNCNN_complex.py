@@ -76,15 +76,15 @@ class DNCNN_ComplexNet(nn.Module):
     #     outputs.append(xi)
     # xr, xi = complex_relu(xr, xi)
 
-    x_out = torch.zeros(len(xr[:, 0, 0, 0]), 2, len(xr[1,0,:,1]),len(xr[1,0,1,:]))
-    x_out = x_out.to(device)
-    x_out[:, 0, :, :] = xr[:, 0, :, :]
-    x_out[:, 1, :, :] = xi[:, 0, :, :]
+#     x_out = torch.zeros(len(xr[:, 0, 0, 0]), 2, len(xr[1,0,:,1]),len(xr[1,0,1,:]))
+#     x_out = x_out.to(device)
+#     x_out[:, 0, :, :] = xr[:, 0, :, :]
+#     x_out[:, 1, :, :] = xi[:, 0, :, :]
 
-    x_diff = x - x_out
+#     x_diff = x - x_out
     # return x_diff,outputs
 #     return x_diff
-    return x - x_out
+    return x - return torch.cat([xr,xi],dim=1)
 
 def load_state_dict(self, state_dict, strict=False):
         own_state = self.state_dict()
