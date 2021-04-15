@@ -58,6 +58,8 @@ class DNCNN_ComplexNet(nn.Module):
             # imaginary part to zero
             # xi = torch.zeros(xr.shape, dtype=xr.dtype, device=xr.device)
         xi = x[:, 1, :, :]
+        xr = xr[:, None, :, :]
+        xi = xi[:, None, :, :]
         xr, xi = self.conv1(xr, xi)
         # with torch.no_grad():
         #     outputs.append(xr)
