@@ -47,44 +47,44 @@ class DNCNN_ComplexNet(nn.Module):
             self.bns.append(bn)
 
     def forward(self, x,device): # forward函数定义了网络的前向传播的顺序
-    with torch.no_grad():
-        xr = x[:, 0, :, :]  # x就是传进来的data
-        # imaginary part to zero
-        # xi = torch.zeros(xr.shape, dtype=xr.dtype, device=xr.device)
-        xi = x[:, 1, :, :]
+      with torch.no_grad():
+          xr = x[:, 0, :, :]  # x就是传进来的data
+          # imaginary part to zero
+          # xi = torch.zeros(xr.shape, dtype=xr.dtype, device=xr.device)
+          xi = x[:, 1, :, :]
 
-        xr = xr[:, None, :, :]
-        xi = xi[:, None, :, :]
-        # outputs = []
-    xr, xi = self.conv1(xr, xi)
-    # with torch.no_grad():
-    #     outputs.append(xr)
-    #     outputs.append(xi)
-    xr, xi = complex_relu(xr, xi)
-    for i in range(DNCNN_HIDDENS):
-        xr, xi = self.hidden[i](xr, xi)
-        # with torch.no_grad():
-        #     outputs.append(xr)
-        #     outputs.append(xi)
-        if self.dobn:
-            xr, xi = self.bns[i](xr, xi)
-        xr, xi = complex_relu(xr, xi)
+          xr = xr[:, None, :, :]
+          xi = xi[:, None, :, :]
+          # outputs = []
+      xr, xi = self.conv1(xr, xi)
+      # with torch.no_grad():
+      #     outputs.append(xr)
+      #     outputs.append(xi)
+      xr, xi = complex_relu(xr, xi)
+      for i in range(DNCNN_HIDDENS):
+          xr, xi = self.hidden[i](xr, xi)
+          # with torch.no_grad():
+          #     outputs.append(xr)
+          #     outputs.append(xi)
+          if self.dobn:
+              xr, xi = self.bns[i](xr, xi)
+          xr, xi = complex_relu(xr, xi)
 
-    xr, xi = self.conv3(xr, xi)
-    # with torch.no_grad():
-    #     outputs.append(xr)
-    #     outputs.append(xi)
-    # xr, xi = complex_relu(xr, xi)
+      xr, xi = self.conv3(xr, xi)
+      # with torch.no_grad():
+      #     outputs.append(xr)
+      #     outputs.append(xi)
+      # xr, xi = complex_relu(xr, xi)
 
-#     x_out = torch.zeros(len(xr[:, 0, 0, 0]), 2, len(xr[1,0,:,1]),len(xr[1,0,1,:]))
-#     x_out = x_out.to(device)
-#     x_out[:, 0, :, :] = xr[:, 0, :, :]
-#     x_out[:, 1, :, :] = xi[:, 0, :, :]
+  #     x_out = torch.zeros(len(xr[:, 0, 0, 0]), 2, len(xr[1,0,:,1]),len(xr[1,0,1,:]))
+  #     x_out = x_out.to(device)
+  #     x_out[:, 0, :, :] = xr[:, 0, :, :]
+  #     x_out[:, 1, :, :] = xi[:, 0, :, :]
 
-#     x_diff = x - x_out
-    # return x_diff,outputs
-#     return x_diff
-    return x - return torch.cat([xr,xi],dim=1)
+  #     x_diff = x - x_out
+      # return x_diff,outputs
+  #     return x_diff
+      return x - return torch.cat([xr,xi],dim=1)
 
 def load_state_dict(self, state_dict, strict=False):
         own_state = self.state_dict()
