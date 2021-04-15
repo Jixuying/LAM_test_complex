@@ -45,15 +45,19 @@ class DNCNN_ComplexNet(nn.Module):
                 self.bns.append(bn)
 
     def forward(self, x): # forward函数定义了网络的前向传播的顺序
-        with torch.no_grad():
-            xr = x[:, 0, :, :]  # x就是传进来的data
+#         with torch.no_grad():
+#             xr = x[:, 0, :, :]  # x就是传进来的data
+#             # imaginary part to zero
+#             # xi = torch.zeros(xr.shape, dtype=xr.dtype, device=xr.device)
+#             xi = x[:, 1, :, :]
+
+#             xr = xr[:, None, :, :]
+#             xi = xi[:, None, :, :]
+            # outputs = []
+        xr = x[:, 0, :, :]  # x就是传进来的data
             # imaginary part to zero
             # xi = torch.zeros(xr.shape, dtype=xr.dtype, device=xr.device)
-            xi = x[:, 1, :, :]
-
-            xr = xr[:, None, :, :]
-            xi = xi[:, None, :, :]
-            # outputs = []
+        xi = x[:, 1, :, :]
         xr, xi = self.conv1(xr, xi)
         # with torch.no_grad():
         #     outputs.append(xr)
