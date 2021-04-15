@@ -1,7 +1,7 @@
 import os
 import torch
 
-MODEL_DIR = '/content/LAM_test_complex/ModelZoo/models/my_model'
+MODEL_DIR = '/content/LAM_test/ModelZoo/models/my_model'
 # MODEL_DIR = '/home/disk1/jixuying/pycharm/毕设/my_complex_ChannelNet/LAM_Demo/ModelZoo/models/my_model'
 
 NN_LIST = [
@@ -13,7 +13,9 @@ NN_LIST = [
     'SRCNNpara_1218_rx_1sir_5_real_channelnet',
     'SRCNNpara_1218_rx_1sir_5_complex_channelnet',
     'SRCNNpara_1218_rx_1sir_n10_real_channelnet',
-    'SRCNNpara_1218_rx_1sir_n10_complex_channelnet'
+    'SRCNNpara_1218_rx_1sir_n10_complex_channelnet',
+    'DNCNNpara_1218_rx_1sir_5_real_channelnet',
+    'DNCNNpara_1218_rx_1sir_5_complex_channelnet'
 ]
 
 
@@ -44,6 +46,12 @@ MODEL_LIST = {
     },
     'SRCNNpara_1218_rx_1sir_n10_complex_channelnet': {
         'Base': 'SRCNNpara_1218_rx_1sir_n10_complex_channelnet.pth',
+    },
+    'DNCNNpara_1218_rx_1sir_5_real_channelnet': {
+        'Base': 'DNCNNpara_1218_rx_1sir_5_real_channelnet.pth',
+    },
+    'DNCNNpara_1218_rx_1sir_5_complex_channelnet': {
+        'Base': 'DNCNNpara_1218_rx_1sir_5_complex_channelnet.pth',
     }
 }
 
@@ -94,6 +102,7 @@ def get_model(model_name, factor=4, num_channels=3):
         elif model_name == 'SRCNNpara_1218_rx_1sir_5_complex_channelnet':
             from .NN.SRCNN_complex import SRCNN_ComplexNet
             net = SRCNN_ComplexNet()
+            
         elif model_name == 'SRCNNpara_1218_rx_1sir_n10_real_channelnet':
             from .NN.SRCNN_real import SRCNN_Net
             net = SRCNN_Net()
@@ -101,6 +110,22 @@ def get_model(model_name, factor=4, num_channels=3):
         elif model_name == 'SRCNNpara_1218_rx_1sir_n10_complex_channelnet':
             from .NN.SRCNN_complex import SRCNN_ComplexNet
             net = SRCNN_ComplexNet()
+            
+        elif model_name == 'DNCNNpara_1218_rx_1sir_5_real_channelnet':
+            from .NN.DNCNN_real import DNCNN_Net
+            net = DNCNN_Net()
+
+        elif model_name == 'DNCNNpara_1218_rx_1sir_5_complex_channelnet':
+            from .NN.DNCNN_complex import DNCNN_ComplexNet
+            net = DNCNN_ComplexNet()
+            
+        elif model_name == 'DNCNNpara_1218_rx_1sir_n10_real_channelnet':
+            from .NN.DNCNN_real import DNCNN_Net
+            net = DNCNN_Net()
+
+        elif model_name == 'DNCNNpara_1218_rx_1sir_n10_complex_channelnet':
+            from .NN.DNCNN_complex import DNCNN_ComplexNet
+            net = DNCNN_ComplexNet()
 
         else:
             raise NotImplementedError()
