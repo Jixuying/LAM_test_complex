@@ -84,7 +84,7 @@ class DNCNN_ComplexNet(nn.Module):
   #     x_diff = x - x_out
       # return x_diff,outputs
   #     return x_diff
-      return x - return torch.cat([xr,xi],dim=1)
+      return x - torch.cat([xr,xi],dim=1)
 
 def load_state_dict(self, state_dict, strict=False):
         own_state = self.state_dict()
