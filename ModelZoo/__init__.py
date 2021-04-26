@@ -16,10 +16,8 @@ NN_LIST = [
     'SRCNNpara_1218_rx_1sir_n10_complex_channelnet',
     'DNCNNpara_1218_rx_1sir_5_real_channelnet',
     'DNCNNpara_1218_rx_1sir_5_complex_channelnet',
-    'SRCNNpara_1218_rx_1sir_5_complex_channelnet2',
-    'SRCNNpara_1218_rx_1sir_5_complex_channelnet3',
-    'SRCNNpara_1218_rx_1sir_n10_complex_channelnet2',
-    'SRCNNpara_1218_rx_1sir_n10_complex_channelnet3'
+    'NewNetpara_1218_rx_1sir_5_real_channelnet',
+    'NewNetpara_1218_rx_1sir_5_complex_channelnet'
 ]
 
 
@@ -57,17 +55,11 @@ MODEL_LIST = {
     'DNCNNpara_1218_rx_1sir_5_complex_channelnet': {
         'Base': 'DNCNNpara_1218_rx_1sir_5_complex_channelnet.pth',
     },
-    'SRCNNpara_1218_rx_1sir_5_complex_channelnet2': {
-        'Base': 'SRCNNpara_1218_rx_1sir_5_complex_channelnet2.pth',
+    'NewNetpara_1218_rx_1sir_5_real_channelnet': {
+        'Base': 'NewNetpara_1218_rx_1sir_5_real_channelnet.pth',
     },
-    'SRCNNpara_1218_rx_1sir_5_complex_channelnet3': {
-        'Base': 'SRCNNpara_1218_rx_1sir_5_complex_channelnet3.pth',
-    },
-    'SRCNNpara_1218_rx_1sir_n10_complex_channelnet2': {
-        'Base': 'SRCNNpara_1218_rx_1sir_n10_complex_channelnet2.pth',
-    },
-    'SRCNNpara_1218_rx_1sir_n10_complex_channelnet3': {
-        'Base': 'SRCNNpara_1218_rx_1sir_n10_complex_channelnet3.pth',
+    'NewNetpara_1218_rx_1sir_5_complex_channelnet': {
+        'Base': 'NewNetpara_1218_rx_1sir_5_complex_channelnet.pth',
     }
 }
 
@@ -143,21 +135,15 @@ def get_model(model_name, factor=4, num_channels=3):
             from .NN.DNCNN_complex import DNCNN_ComplexNet
             net = DNCNN_ComplexNet()
             
-        elif model_name == 'SRCNNpara_1218_rx_1sir_5_complex_channelnet2':
-            from .NN.SRCNN_complex import SRCNN_ComplexNet
-            net = SRCNN_ComplexNet()
-            
-        elif model_name == 'SRCNNpara_1218_rx_1sir_5_complex_channelnet3':
-            from .NN.SRCNN_complex import SRCNN_ComplexNet
-            net = SRCNN_ComplexNet()
-            
-        elif model_name == 'SRCNNpara_1218_rx_1sir_n10_complex_channelnet2':
-            from .NN.SRCNN_complex import SRCNN_ComplexNet
-            net = SRCNN_ComplexNet()
-            
-        elif model_name == 'SRCNNpara_1218_rx_1sir_n10_complex_channelnet3':
-            from .NN.SRCNN_complex import SRCNN_ComplexNet
-            net = SRCNN_ComplexNet()
+        elif model_name == 'NewNetpara_1218_rx_1sir_5_real_channelnet':
+            from .NN.NewNet_real import NewNet_Net
+            net = NewNet_Net(growthRate=12, depth=11, reduction=0.5,
+                                               bottleneck=False, nClasses=10)
+
+        elif model_name == 'DNCNNpara_1218_rx_1sir_5_complex_channelnet':
+            from .NN.NewNet_complex import NewNet_ComplexNet
+            net = NewNet_ComplexNet(growthRate=6, depth=11, reduction=0.5,
+                               bottleneck=False, nClasses=10)
 
         else:
             raise NotImplementedError()
@@ -189,7 +175,5 @@ def load_model(model_loading_name):
     state_dict = torch.load(state_dict_path, map_location='cpu')
     net.load_state_dict(state_dict)
     return net
-
-
 
 
