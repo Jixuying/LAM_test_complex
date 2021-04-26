@@ -139,14 +139,14 @@ class NewNet_ComplexNet(nn.Module):
         return nn.Sequential(*layers)
 
     def forward(self, x):
-        with torch.no_grad():
-            xr = x[:, 0, :, :]  # x就是传进来的data
-            # imaginary part to zero
-            # xi = torch.zeros(xr.shape, dtype=xr.dtype, device=xr.device)
-            xi = x[:, 1, :, :]
+#         with torch.no_grad():
+        xr = x[:, 0, :, :]  # x就是传进来的data
+        # imaginary part to zero
+        # xi = torch.zeros(xr.shape, dtype=xr.dtype, device=xr.device)
+        xi = x[:, 1, :, :]
 
-            xr = xr[:, None, :, :]
-            xi = xi[:, None, :, :]
+        xr = xr[:, None, :, :]
+        xi = xi[:, None, :, :]
      
         xr_out1, xi_out1 = self.conv1_desnet(xr, xi)
         xr_out, xi_out = self.singleLayer1(xr_out1, xi_out1)
@@ -187,12 +187,12 @@ class NewNet_ComplexNet(nn.Module):
         xr_out6 = xr_out1 - xr_out5
         xi_out6 = xi_out1 - xi_out5
         xr_out, xi_out = self.conv4(xr_out6, xi_out6)
-        x_final_out = torch.zeros(len(xr[:, 0, 0, 0]), 2, len(xr[1, 0, :, 1]), len(xr[1, 0, 1, :]))
-        x_final_out[:, 0, :, :] = xr_out[:, 0, :, :]
-        x_final_out[:, 1, :, :] = xi_out[:, 0, :, :]
+#         x_final_out = torch.zeros(len(xr[:, 0, 0, 0]), 2, len(xr[1, 0, :, 1]), len(xr[1, 0, 1, :]))
+#         x_final_out[:, 0, :, :] = xr_out[:, 0, :, :]
+#         x_final_out[:, 1, :, :] = xi_out[:, 0, :, :]
         # out = torch.squeeze(F.avg_pool2d(F.relu(self.bn1(out)), 8))
         # out = F.log_softmax(self.fc(out))
-        return x_final_out
+        return torch.cat([xr_out,xi_out],dim=1)
 
     def load_state_dict(self, state_dict, strict=False):
         own_state = self.state_dict()
