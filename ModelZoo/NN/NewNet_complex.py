@@ -1,4 +1,4 @@
-import torch  NewNet_ComplexNet
+import torch 
 import numpy as np
 import torch.nn as nn
 from data_process import interpolation_real
