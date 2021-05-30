@@ -71,7 +71,7 @@ def attr_Laplace(tensor, h, w, window_h=16, window_w=16, reduce='sum'):
 #     print(tensor[:, :, 1:h_x - 1, :].shape)
     h_grad = (tensor[:, :, 2:, :] + tensor[:, :, :h_x - 2, :]- tensor[:, :, 1:h_x - 1, :])
     w_grad = (tensor[:, :, :, 2:] + tensor[:, :, :, :w_x - 2]- tensor[:, :, :, 1:w_x - 1])
-    grad = (h_grad[:, :, :, :-1] + w_grad[:, :, :-1, :])
+    grad = (h_grad[:, :, :, 1:-1] + w_grad[:, :, 1:-1, :])
     crop = grad[:, :, h: h + window_h, w: w + window_w]
     return reduce_func(reduce)(crop)
 
