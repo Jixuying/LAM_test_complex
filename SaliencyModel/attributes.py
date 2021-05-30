@@ -52,7 +52,7 @@ def attr_grad(tensor, h, w, window_h=16, window_w=16, reduce='sum'):
     crop = grad[:, :, h: h + window_h, w: w + window_w]
     return reduce_func(reduce)(crop)
 
-def attr_Laplace(tensor, h, w, window=8, reduce='sum'):
+def attr_Laplace(tensor, h, w, window_h=16, window_w=16, reduce='sum'):
     """
     :param tensor: B, C, H, W tensor
     :param h: h position
@@ -69,7 +69,7 @@ def attr_Laplace(tensor, h, w, window=8, reduce='sum'):
     h_grad = (tensor[:, :, 2:, :] + tensor[:, :h_x - 2, :, :]- tensor[:, :, 1:h_x - 1, :])
     w_grad = (tensor[:, :, :, 2:] + tensor[:, :, :, :w_x - 2]- tensor[:, :, :, 1:w_x - 1])
     grad = (h_grad[:, :, :, :-1] + w_grad[:, :, :-1, :])
-    crop = grad[:, :, h: h + window, w: w + window]
+    crop = grad[:, :, h: h + window_h, w: w + window_w]
     return reduce_func(reduce)(crop)
 
 
