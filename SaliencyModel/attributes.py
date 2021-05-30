@@ -35,7 +35,7 @@ def attr_id(tensor, h, w, window=8, reduce='sum'):
     return reduce_func(reduce)(crop)
 
 
-def attr_grad(tensor, h, w, window_h=16, window_w=16, reduce='sum'):
+def attr_grad(tensor, h, w, window_h, window_w, reduce='sum'):
     """
     :param tensor: B, C, H, W tensor
     :param h: h position
